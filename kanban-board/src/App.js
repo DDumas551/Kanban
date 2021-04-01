@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
+import { AppProvider } from "./context/Context";
+import Category from "./components/Category";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppProvider>
+        <div className="title-container">
+          <div className="app-title">S O O D</div>
+          <div className="new-task">new task</div>
+        </div>
+        <div className="app-container">
+          <Category title="To Dos" />
+          <Category title="In Progress" />
+          <Category title="In Review" />
+          <Category title="Done" />
+        </div>
+      </AppProvider>
     </div>
   );
 }
