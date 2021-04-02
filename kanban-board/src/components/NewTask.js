@@ -17,10 +17,10 @@ export default function NewTask() {
   const toggleModal = () => {
     setModalOpen(!modalOpen);
   };
-
+  console.log(employees);
   useEffect(() => {
-    if (!window.localStorage.getItem("employees")) {
-      window.localStorage.setItem("employees", employees);
+    if (employees !== []) {
+      window.localStorage.setItem("employees", JSON.stringify(employees));
     }
   }, [setEmployees, todo, employees]);
 
