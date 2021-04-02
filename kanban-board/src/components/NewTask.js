@@ -1,16 +1,28 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../context/Context";
 
 export default function NewTask() {
-  const { modalOpen, setModalOpen, employees, todo, setTodo } = useContext(
-    Context
-  );
+  const {
+    modalOpen,
+    setModalOpen,
+    todo,
+    setTodo,
+    employees,
+    setEmployees,
+  } = useContext(Context);
 
   const [newTask, setNewTask] = useState("");
+  const [newEmployee, setNewEmployee] = useState("");
 
-  const toggleModal = (e) => {
+  const toggleModal = () => {
     setModalOpen(!modalOpen);
   };
+
+  useEffect(() => {
+    if (!window.localStorage.getItem("employees")) {
+      window.localStorage.setItem("employees", employees);
+    }
+  }, [setEmployees, todo, employees]);
 
   return (
     <div className="modal" style={{ display: modalOpen ? "block" : "none" }}>
@@ -31,6 +43,14 @@ export default function NewTask() {
             onChange={(e) => setNewTask(e.target.value)}
           />
           <br />
+          <label htmlFor="priority">Priority: </label>
+          <select id="priority" name="priority">
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={4}>4</option>
+            <option value={8}>8</option>
+          </select>
+          <br />
           <label htmlFor="dropdown">Assigned to: </label>
           <select id="dropdown" name="dropdown">
             {employees.map((e) => {
@@ -42,23 +62,60 @@ export default function NewTask() {
             })}
           </select>
           <br />
-          <br />
+          <label>New Employee: </label>
+          <input
+            id="newEmployee"
+            name="newEmployee"
+            type="text"
+            placeholder="New Employee"
+            value={newEmployee}
+            onChange={(e) => setNewEmployee(e.target.value)}
+          />
           <div className="button-row">
             <button onClick={(e) => toggleModal(e)}>Close</button>
             <button
               type="submit"
               onClick={() => {
-                var date = Date.now();
-                var assigned = document.querySelector("#dropdown").value;
-                setTodo((todo) => [
-                  ...todo,
-                  { id: date, task: newTask, priority: 8, assigned: assigned },
-                ]);
-                setNewTask("");
-                toggleModal();
+                if (newTask) {
+                  var date = Date.now();
+                  var assigned = document.querySelector("#dropdown").value;
+                  var prio = document.querySelector("#priority").value;
+                  setTodo((todo) => [
+                    ...todo,
+                    {
+                      id: date,
+                      task: newTask,
+                      priority: prio,
+                      assigned: assigned,
+                    },
+                  ]);
+                  setNewTask("");
+                  toggleModal();
+                }
               }}
+              disabled={!newTask || false}
             >
               Submit
+            </button>
+            <button
+              type="submit"
+              disabled={!newEmployee}
+              onClick={
+                () => {
+                  if (newEmployee) {
+                    if (!employees.includes(newEmployee)) {
+                      setEmployees((employees) => [...employees, newEmployee]);
+                      setNewEmployee("");
+                    }
+                  }
+                }
+                //   ,
+                // () => {
+                //   window.localStorage.setItem("employees", employees);
+                //   }
+              }
+            >
+              Add Employee
             </button>
           </div>
         </form>

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../context/Context";
+import moment from "moment";
 
 export default function TaskCard({ item, title }) {
   const {
@@ -15,16 +16,16 @@ export default function TaskCard({ item, title }) {
 
   let cardBackground;
   switch (item.priority) {
-    case 1:
+    case "1":
       cardBackground = "red";
       break;
-    case 2:
+    case "2":
       cardBackground = "orange";
       break;
-    case 4:
+    case "4":
       cardBackground = "yellow";
       break;
-    case 8:
+    case "8":
       cardBackground = "white";
       break;
     default:
@@ -100,11 +101,14 @@ export default function TaskCard({ item, title }) {
           {item.task}
         </div>
         <div style={{ fontSize: "12px" }}>Assigned to: {item.assigned}</div>
-        <div style={{ fontSize: "12px" }}>Created: {item.id}</div>
+        <div style={{ fontSize: "12px" }}>
+          Created: {moment(item.id).format("LL")}
+        </div>
         <div className="task-buttons">
           <div
             className="delete-button"
             onClick={() => deleteTask(title, item)}
+            style={{ color: item.priority === "1" ? "black" : "red" }}
           >
             Delete
           </div>

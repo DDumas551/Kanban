@@ -77,9 +77,6 @@ hr {
   margin-bottom: 10px;
 }
 
-/* .task-content {
-} */
-
 .task-buttons {
   display: flex;
   flex-direction: row;
@@ -139,7 +136,11 @@ hr {
 }
 
 input,
-select,
+select {
+  width: 50%;
+  margin: auto;
+}
+
 form {
   width: 85%;
   margin: auto;
