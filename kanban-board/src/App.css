@@ -67,14 +67,22 @@ hr {
   width: 92%;
   height: 87%;
   margin: auto;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .task-card {
   min-height: 50px;
-  width: 100%;
+  width: 96%;
   border-radius: 7px;
-  box-shadow: 0px 0px 5px rgb(226, 226, 226);
-  margin-bottom: 10px;
+  box-shadow: 0px 0px 5px rgb(180, 180, 180);
+  margin: auto;
+  margin-bottom: 15px;
+  margin-top: 5px;
+  padding: 5px;
 }
 
 .task-buttons {
