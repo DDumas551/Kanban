@@ -4,7 +4,13 @@ export const Context = createContext();
 
 export function AppProvider(props) {
   const [todo, setTodo] = useState([
-    { id: 1617329216594, task: "Run upside down", priority: 8, assigned: "Me" },
+    {
+      id: 1617329216594,
+      task:
+        "Running was invented in 1762 when Thomas Running tried to walk twice at the same time",
+      priority: 8,
+      assigned: "Me",
+    },
   ]);
   const [inProgress, setInProgress] = useState([]);
   const [inReview, setInReview] = useState([]);
