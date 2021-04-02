@@ -96,7 +96,11 @@ export default function TaskCard({ item, title }) {
   return (
     <div className="task-card" style={{ backgroundColor: cardBackground }}>
       <div className="task-content">
-        <div className="task-text">{item.task}</div>
+        <div className="task-text" style={{ fontSize: "25px" }}>
+          {item.task}
+        </div>
+        <div style={{ fontSize: "12px" }}>Assigned to: {item.assigned}</div>
+        <div style={{ fontSize: "12px" }}>Created: {item.id}</div>
         <div className="task-buttons">
           <div
             className="delete-button"
@@ -135,17 +139,6 @@ export default function TaskCard({ item, title }) {
             </div>
           )}
         </div>
-        {/* <div>
-          <div className="move-text">Move to:</div>
-          <label>To Do</label>
-          <input type="checkbox" />
-          <label>In Progress</label>
-          <input type="checkbox" />
-          <label>In Review</label>
-          <input type="checkbox" />
-          <label>Done</label>
-          <input type="checkbox" />
-        </div> */}
       </div>
     </div>
   );
